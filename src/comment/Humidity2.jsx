@@ -1,77 +1,75 @@
 import * as echarts from "echarts";
 import { useEffect, useRef } from 'react';
-export default function Demo02 () {
+export default function Humidity2 () {
   const charRef = useRef()
   useEffect(() => {
     initChart()
   }, [])
   const datas = [
     [0, 30,],
-    [4, 40],
-    [7.5, 60],
-    [10, 55],
-    [12.5, 80],
-    [15, 70],
-    [17.5, 45],
-    [20, 50],
-    [22.5, 80],
-    [25, 60],
+    [2, 40],
+    [7, 60,],
+    [9, 80],
+    [13, 70],
+    [17, 90],
+    [20, 80],
+    [25, 70],
     [30, 80]]
   const initChart = () => {
     var myChart = echarts.init(charRef.current);
     myChart.setOption({
       title: {
-        text: '水温:°C',
+        text: '湿度：%',
         textStyle: {
           fontSize: 14,
-          color: '#6bced6',
+          color: '#b0aee8',
         }
       },
       grid: {
         left: '6.5%',
-        show: true,
-        borderColor: '#2e576a',
       },
       xAxis: {
         type: 'value',
-        splitNumber: 5,
+        splitNumber: 6,
+        axisLabel: {
+          show: true,
+          color: '#b0aee8',
+          formatter: function (value, index) {
+            return value
+          }
+        },
         axisLine: {
           show: true,
           lineStyle: {
-            color: '#2e576a'
+            color: '#616195'
+          },
+        },
+        splitLine: {
+          show: true,
+          lineStyle: {
+            color: '#656095'
           },
         },
         axisTick: {
           show: false,
         },
-        axisLabel: {
-          show: true,
-          color: '#6bced6',
-          formatter: function (value, index) {
-            if (index == 0) return ''
-            console.log(value)
-            return `${value}min`
-          }
-        },
-        splitLine: {
-          show: false,
-        }
       },
       yAxis: {
         type: 'value',
         max: 100,
         axisLabel: {
-          color: '#6bced6',
+          color: '#b0aee8',
         },
         axisLine: {
           show: true,
           lineStyle: {
-            color: '#2e576a'
+            color: '#616195'
           }
         },
         splitLine: {
+          show: true,
           lineStyle: {
-            color: '#2e576a',
+            color: '#616195',
           }
         },
         axisTick: {
@@ -80,45 +78,42 @@ export default function Demo02 () {
       },
       series: [
         {
-          name: 'a',
+          // name: 'a',
           data: datas,
           type: 'line',
-          symbolSize: 12,
+          symbolSize: 10,
           label: {
             show: true,
             position: 'top',
-            fontSize: '12',
+            fontSize: '11',
             color: '#fff',
             formatter: (item) => {
-              if (item.dataIndex == 0) return '';
-              return `${item.value[1]}℃`;
+              if (item.dataIndex == 0 || item.dataIndex == 7 || item.dataIndex == 8) return '';
+              return `${item.value[1]}%`;
             }
           },
           areaStyle: {
-            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-              { offset: 0, color: '#67faf7' },
-              { offset: 0.5, color: 'rgba(71, 153, 167,0.9)' },
-              { offset: 1, color: 'rgba(71, 153, 167,0)' }])
-          },
-          itemStyle: {
-            color: '#6bced6',
-            borderWidth: 2,
-            borderColor: {
+            color: {
               type: 'linear',
               x: 0,
               y: 0,
-              x2: 1,
-              y2: 0,
+              x2: 0,
+              y2: 1,
               colorStops: [{
-                offset: 0, color: '#fcd95a' // 0% 处的颜色
+                offset: 0, color: '#9482fe' // 0% 处的颜色
               }, {
-                offset: 1, color: '#fff' // 100% 处的颜色
+                offset: 1, color: 'rgba(148,130,254,0)' // 100% 处的颜色
               }],
-              global: false // 缺省为 false
-            },
+              global: false // 缺省为 false 
+            }
+          },
+          itemStyle: {
+            color: '#c5ffc1',
+            borderWidth: 3,
+            borderColor: '#cfc5ff',
           },
           lineStyle: {
-            color: '#fcd95a',
+            color: '#9482fe',
           }
         }
       ]

@@ -1,6 +1,6 @@
 import * as echarts from "echarts";
 import { useEffect, useRef } from 'react';
-export default function Demo03 () {
+export default function WaterTemperature2 () {
   const charRef = useRef()
   useEffect(() => {
     initChart()
@@ -38,7 +38,7 @@ export default function Demo03 () {
           label: {
             show: true,
             position: 'top',
-            fontSize: '12',
+            fontSize: '11',
             color: '#fff',
             formatter: (item) => {
               if (item.dataIndex == 0) return '';

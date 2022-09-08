@@ -1,54 +1,59 @@
 import * as echarts from "echarts";
 import { useEffect, useRef } from 'react';
-export default function Demo04 () {
+export default function EC3 () {
   const charRef = useRef()
   useEffect(() => {
     initChart()
   }, [])
   const datas = [
-    [0, 8,],
-    [2, 15,],
-    [5, 18],
-    [10, 17],
-    [15, 20],
-    [20, 23],
-    [25, 32],
-    [30, 30]]
+    [0, 19],
+    [5, 40],
+    [10, 50],
+    [15, 50],
+    [20, 70],
+    [25, 80],
+    [30, 70],
+    [35, 61]]
   const initChart = () => {
     var myChart = echarts.init(charRef.current);
     myChart.setOption({
       title: {
-        text: '水温:°C',
+        text: 'EC值：us/cm',
         textStyle: {
           fontSize: 14,
-          color: '#cfb1f1',
+          color: '#76eaef',
         }
       },
       grid: {
         left: '6.5%',
-        show: true,
-        borderColor: '#585a89'
       },
       xAxis: {
         type: 'value',
+        name: '时间：min',
+        nameLocation: 'end',
+        nameTextStyle: {
+          color: '#76eaef',
+          verticalAlign: 'top',
+        },
         splitNumber: 6,
         axisLabel: {
           show: true,
-          color: '#ae8fce',
+          color: '#76eaef',
           formatter: function (value, index) {
+            if (index == 0) return ''
             return value
           }
         },
         axisLine: {
           show: true,
           lineStyle: {
-            color: '#7a569e'
+            color: '#455080'
           },
         },
         splitLine: {
           show: true,
           lineStyle: {
-            color: '#4a4d7b'
+            color: '#7685b9',
           },
         },
         axisTick: {
@@ -59,18 +64,18 @@ export default function Demo04 () {
         type: 'value',
         max: 100,
         axisLabel: {
-          color: '#b292d6',
+          color: '#76eaef',
         },
         axisLine: {
           show: true,
           lineStyle: {
-            color: '#3b4c7c'
+            color: '#455080'
           }
         },
         splitLine: {
           show: true,
           lineStyle: {
-            color: '#595c8a',
+            color: '#455080',
           }
         },
         axisTick: {
@@ -82,7 +87,7 @@ export default function Demo04 () {
           // name: 'a',
           data: datas,
           type: 'line',
-          symbolSize: 7,
+          symbolSize: 11,
           label: {
             show: true,
             position: 'top',
@@ -90,7 +95,7 @@ export default function Demo04 () {
             color: '#fff',
             formatter: (item) => {
               if (item.dataIndex == 0 || item.dataIndex == 7) return '';
-              return `${item.value[1]}℃`;
+              return `${item.value[1]}`;
             }
           },
           areaStyle: {
@@ -101,20 +106,22 @@ export default function Demo04 () {
               x2: 0,
               y2: 1,
               colorStops: [{
-                offset: 0, color: '#f971fa' // 0% 处的颜色
+                offset: 0, color: '#6848da' // 0% 处的颜色
               }, {
-                offset: 1, color: 'rgba(255,6,255,0.1)' // 100% 处的颜色
+                offset: 0.5, color: 'rgba(35, 59, 145,0.7)' // 0% 处的颜色
+              }, {
+                offset: 1, color: 'rgba(31, 54, 135,0.3)' // 100% 处的颜色
               }],
               global: false // 缺省为 false 
             }
           },
           itemStyle: {
-            color: '#ffc2ff',
-            borderWidth: 3,
-            borderColor: '#fd8eff',
+            color: '#a9bdff',
+            borderWidth: 4,
+            borderColor: '#4575ff',
           },
           lineStyle: {
-            color: '#f971fa',
+            color: '#4a73ff',
           }
         }
       ]

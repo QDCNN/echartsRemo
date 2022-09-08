@@ -1,20 +1,24 @@
 
-import Demo01 from './comment/Demo01'
-import Demo02 from './comment/Demo02'
-import Demo03 from './comment/Demo03'
-import Demo04 from './comment/Demo04'
-import Demo0001 from './comment/Demo0001'
-// import UserInterval from "./comment/UserInterval";
+import WaterTemperature3 from './comment/WaterTemperature3'
+import WaterTemperature1 from './comment/WaterTemperature1'
+import WaterTemperature2 from './comment/WaterTemperature2'
+import Temperature3 from './comment/Temperature3'
+import Humidity2 from './comment/Humidity2'
+import Humidity1 from './comment/Humidity1'
+import Oxygen3 from './comment/Oxygen3'
+import EC3 from './comment/EC3'
 
 function App () {
   return (
     <div className="App">
-      <Demo01 />
-      <Demo02 />
-      <Demo03 />
-      {/* <UserInterval /> */}
-      <Demo04 />
-      {/* <Demo0001 /> */}
+      <WaterTemperature3 />
+      <WaterTemperature1 />
+      <WaterTemperature2 />
+      <Temperature3 />
+      <Humidity2 />
+      <Humidity1 />
+      <Oxygen3 />
+      <EC3 />
     </div>
   )
 }

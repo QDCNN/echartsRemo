@@ -1,10 +1,19 @@
 import * as echarts from "echarts";
 import { useEffect, useRef } from 'react';
-export default function Demo01 () {
+export default function WaterTemperature3 () {
   const charRef = useRef()
   useEffect(() => {
     initChart()
   }, [])
+  const datas = [
+    [0, 18,],
+    [5, 40],
+    [10, 50],
+    [15, 40],
+    [20, 60],
+    [25, 80],
+    [30, 70],
+    [35, 62]]
   const initChart = () => {
     var myChart = echarts.init(charRef.current);
     myChart.setOption({
@@ -15,27 +24,22 @@ export default function Demo01 () {
           color: '#aad8ff',
         }
       },
-      categoryAxis: {
-        position: 'right',
-        axisLine: {
-          show: true,
-          lineStyle: {
-            color: '#fff',
-          }
-        }
-      },
       grid: {
         left: '6.5%',
         show: true,
         borderColor: '#3b4c7c'
       },
       xAxis: {
-        type: 'category',
-        boundaryGap: false,
+        type: 'value',
+        splitNumber: 6,
         axisLabel: {
+          show: true,
           color: '#a4b4ed',
+          formatter: function (value, index) {
+            if (index == 0 || index == 7) return ''
+            return `${value}min`
+          }
         },
-        data: ['', '5min', '10min', '15min', '20min', '25min', '30min', ''],
         axisLine: {
           show: true,
           lineStyle: {
@@ -44,13 +48,9 @@ export default function Demo01 () {
         },
         splitLine: {
           show: true,
-          interval: (index, value) => {
-            if (index === 0 || index === 7) return false
-            return true
-          },
           lineStyle: {
-            color: '#a4b4ed'
-          }
+            color: ['#a4b4ed', '#a4b4ed', '#a4b4ed', '#a4b4ed', '#a4b4ed', '#a4b4ed', '#a4b4ed', 'transparent']
+          },
         },
         axisTick: {
           show: false,
@@ -74,40 +74,51 @@ export default function Demo01 () {
             color: '#3b4c7c',
           }
         },
-
+        axisTick: {
+          show: false,
+        },
       },
       series: [
         {
           // name: 'a',
-          data: [18, 40, 50, 40, 60, 80, 70, 63],
+          data: datas,
           type: 'line',
           symbolSize: 12,
           label: {
             show: true,
             position: 'top',
-            fontSize: '12',
+            fontSize: '11',
             color: '#fff',
             formatter: (item) => {
               if (item.dataIndex == 0 || item.dataIndex == 7) return '';
-              // console.log('item: ', item)
-              return `${item.value}℃`;
+              return `${item.value[1]}℃`;
             }
           },
           areaStyle: {
-            normal: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                { offset: 0, color: '#FF00FF' },
-                { offset: 0.5, color: 'rgba(255,0,255,0.4' },
-                { offset: 1, color: 'rgba(255,0,255,0' }])
+            color: {
+              type: 'linear',
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [{
+                offset: 0, color: '#FF00FF' // 0% 处的颜色
+              }, {
+                offset: 1, color: 'rgba(255,0,255,0)' // 100% 处的颜色
+              }],
+              global: false // 缺省为 false 
             }
           },
           itemStyle: {
-            normal: {
-              color: '#fff',
-              lineStyle: {
-                color: 'transparent',
-              }
-            }
+            color: (params) => {
+              // if(params.dataIndex == 0 ||params.dataIndex == 7) return 'transparent'
+              return '#d5b5ff'
+            },
+            borderWidth: 4,
+            borderColor: '#888eff',
+          },
+          lineStyle: {
+            color: 'transparent',
           }
         }
       ]
